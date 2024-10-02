@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: podinfo
+  name: podinfo
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: podinfo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: podinfo
+    spec:
+      containers:
+      - image: thschue/podtato-server:v0.3.3
+        name: podtato-server
+        env:
+          - name: PODTATO_HAT_PART_NUMBER
+            valueFrom:
+              configMapKeyRef:
+                name: podtato-config-1
+                key: PODTATO_HAT_PART_NUMBER
+          - name: PODTATO_LEFT_ARM_PART_NUMBER
+            valueFrom:
+             configMapKeyRef:
+                name: podtato-config-1
+                key: PODTATO_LEFT_ARM_PART_NUMBER
+
+          - name: PODTATO_RIGHT_ARM_PART_NUMBER
+            valueFrom:
+             configMapKeyRef:
+                name: podtato-config-1
+                key: PODTATO_RIGHT_ARM_PART_NUMBER
+
+---
+apiVersion: v1
+data:
+  PODTATO_HAT_PART_NUMBER: '02'
+  PODTATO_LEFT_ARM_PART_NUMBER: '05'
+  PODTATO_RIGHT_ARM_PART_NUMBER: '03'
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: podtato-config-1
+---
+apiVersion: v1
+data:
+  PODTATO_SECRET_MESSAGE: SGVsbG8gS3ViZXJuZXRlcyBHdXJ1cyE=
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: seckey
