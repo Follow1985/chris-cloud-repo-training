@@ -12,6 +12,7 @@ metadata:
   labels:
     app: podinfo
   name: podinfo
+  namespace: podinfo
 spec:
   replicas: 5
   selector:
@@ -55,3 +56,14 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: podtato-config-1
+  namespace: podinfo
+---
+apiVersion: v1
+data:
+  MY_KEY: MY_VALUE
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: podtato-config-1
+  namespace: podinfo
+  
