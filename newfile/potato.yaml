@@ -1,24 +1,14 @@
 apiVersion: v1
-kind: Deployment
+kind: Pod
 metadata:
-  creationTimestamp: null
-  labels:
-    app: podinfo
-  name: podinfo
+  name: nginx-pod
+  lables:
+    app: nginx
 spec:
-  replicas: 5
-  selector:
-    matchLabels:
-      app: podinfo
-  strategy: {}
-  template:
-    metadata:
-      creationTimestamp: null
-      labels:
-        app: podinfo
-    spec:
-      containers:
-      - image: thschue/podtato-server:v0.3.3
-        name: podtato-server
+  containers:
+  - name: nginx-container
+    image: nginx:latest
+    ports:
+      - containerPort: 80
 
   
