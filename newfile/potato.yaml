@@ -55,11 +55,3 @@ kind: ConfigMap
 metadata:
   creationTimestamp: null
   name: podtato-config-1
----
-apiVersion: v1
-data:
-  PODTATO_SECRET_MESSAGE: SGVsbG8gS3ViZXJuZXRlcyBHdXJ1cyE=
-kind: Secret
-metadata:
-  creationTimestamp: null
-  name: seckey
